@@ -49,5 +49,12 @@ class gradebook_sql_connection:
             tables.append(x[0])
         return tables
     
+    # Insert all the data in one go
+    def insert_all_data(self, query, values):
+        self.mycursor.executemany(query,values)
+    
+    # create new table with a query
+    def create_new_table(self,query):
+        self.mycursor.execute(query)
 
 

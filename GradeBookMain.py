@@ -1,8 +1,9 @@
 import gradebook_sql
-import pandas as pd
+from gradebook_csv import Gradebook_csv
 
 #Create a database connection object
 c1 = gradebook_sql.gradebook_sql_connection()
+g_csv = Gradebook_csv()
 
 def main():
     print("""   ____     ____        _      ____  U _____ u   ____     U  ___ u   U  ___ u   _  __    
@@ -17,11 +18,14 @@ U /"___|uU |  _"\ u U  /"\  u |  _"\ \| ___"|/U | __")u    \/"_ \/    \/"_ \/  |
     for x in all_tables:
             print(x)
             c1.dropTable(x)
-    c1.createTable("NewClass")
-    c1.createTable("Classes")
+    #c1.createTable("NewClass")
+    #c1.createTable("Classes")
+    c1.create_new_table(g_csv.get_school_table_query())
+    q,d = g_csv.insert_data_in_school_table()
+    #print(q,d)
+    c1.insert_all_data(q,d)
+    print(c1.get_tables())
 
-    test_df = pd.read_csv('C:/Users/Gradebook/Desktop/Project/Test.csv')
-    print(test_df)
 
 if __name__ == "__main__":
     main()
