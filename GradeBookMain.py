@@ -23,7 +23,7 @@ U /"___|uU |  _"\ u U  /"\  u |  _"\ \| ___"|/U | __")u    \/"_ \/    \/"_ \/  |
     c1.create_new_table(g_csv.get_school_table_query())
     q,d = g_csv.insert_data_in_school_table()
     #print(q,d)
-    c1.insert_all_data(q,d)
+    #c1.insert_all_data(q,d)
     print(c1.get_tables())
 
 
