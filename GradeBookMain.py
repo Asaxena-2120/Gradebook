@@ -1,4 +1,5 @@
 import gradebook_sql
+import pandas as pd
 
 #Create a database connection object
 c1 = gradebook_sql.gradebook_sql_connection()
@@ -19,7 +20,8 @@ U /"___|uU |  _"\ u U  /"\  u |  _"\ \| ___"|/U | __")u    \/"_ \/    \/"_ \/  |
     c1.createTable("NewClass")
     c1.createTable("Classes")
 
- 
+    test_df = pd.read_csv('C:/Users/Gradebook/Desktop/Project/Test.csv')
+    print(test_df)
 
 if __name__ == "__main__":
     main()
