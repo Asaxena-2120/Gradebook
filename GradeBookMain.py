@@ -1,5 +1,6 @@
 import gradebook_sql
 from gradebook_csv import Gradebook_csv
+import query_and_data as qd
 
 #Create a database connection object
 c1 = gradebook_sql.gradebook_sql_connection()
@@ -17,24 +18,27 @@ U /"___|uU |  _"\ u U  /"\  u |  _"\ \| ___"|/U | __")u    \/"_ \/    \/"_ \/  |
 
     #c1.createTable("NewClass")
     #c1.createTable("Classes")
-    drop_all_tables()
+    
     #c1.create_new_table(g_csv.get_school_table_query())
     #q,d = g_csv.insert_data_in_school_table()
-    print(c1.get_tables)
-    g_csv.create_tables(c1)
-    g_csv.insert_data_in_school_table(c1)
-    #print(q,d)
-    #c1.insert_all_data(q,d)
-    print(c1.get_tables())
+    # print(c1.get_tables)
+    # g_csv.create_tables(c1)
+    # g_csv.insert_data_in_school_table(c1)
+    # #print(q,d)
+    # #c1.insert_all_data(q,d)
+    # print(c1.get_tables())
 
 #Function to clear all tables from the DB
 #Call to perform database testing and loading while developing DB Code
-def drop_all_tables():
-    all_tables = c1.get_tables()
-    for x in all_tables:
-            print(x)
-            c1.dropTable(x)
+
 
 
 if __name__ == "__main__":
-    main()
+    # Drop all tables
+    qd.drop_all_tables()
+
+    # Create all tables
+    qd.create_school_table()
+    qd.create_class_table()
+    qd.create_student_table()
+    qd.create_test_table()
