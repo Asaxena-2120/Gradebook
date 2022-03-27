@@ -38,18 +38,28 @@ def create_school_table():
     (schoolName, schoolAddress)
     VALUES (%s, %s)
     """
+    
+    # Converting dataframe into list of dictionaries, 
+    # where each row is a dictionary with column names as the keys
+    school_dict = school_df.to_dict('records')
 
-    school_dict = (school_df.to_dict('records'))
+    # school_data is a list of tuples, 
+    # where each tuple contains data values corresponding to single row from csv
     school_data = []
     for dictionary in school_dict:
         l =[]
         for key in dictionary:
+            # As school_id is auto incremented, so skipping SchoolID column
             if key == 'SchoolID':
                 pass
             else:
                 l.append(dictionary[key])
         school_data.append(tuple(l))
+    
+    # Inserting all the rows from csv into table
     mycursor.executemany(insert_school_query, school_data)
+
+    # Commiting inserted data to the database
     db.commit()
 
 
@@ -70,13 +80,21 @@ def create_class_table():
     (classId, className, semester)
     VALUES (%s, %s, %s)
     """
-
+    
+    # Converting dataframe into list of dictionaries, 
+    # where each row is a dictionary with column names as the keys
     class_dict = (class_df.to_dict('records'))
+
+    # class_data is a list of tuples, 
+    # where each tuple contains data values corresponding to single row from csv
     class_data = []
     for dictionary in class_dict:
         class_data.append(tuple(dictionary.values()))
     
+    # Inserting all the rows from csv into table
     mycursor.executemany(insert_class_query, class_data)
+
+    # Commiting inserted data to the database
     db.commit()
 
 # STUDENT
@@ -96,13 +114,21 @@ def create_student_table():
     (studentId, studentName, email)
     VALUES (%s, %s, %s)
     """
-
+    
+    # Converting dataframe into list of dictionaries, 
+    # where each row is a dictionary with column names as the keys
     student_dict = (student_df.to_dict('records'))
+
+    # student_data is a list of tuples, 
+    # where each tuple contains data values corresponding to single row from csv
     student_data = []
     for dictionary in student_dict:
         student_data.append(tuple(dictionary.values()))
     
+    # Inserting all the rows from csv into table
     mycursor.executemany(insert_student_query, student_data)
+
+    # Commiting inserted data to the database
     db.commit()
 
 # TEST
@@ -126,13 +152,21 @@ def create_test_table():
     (testId, testName, studentId, classId, score)
     VALUES (%s, %s, %s, %s, %s)
     """
-
+    
+    # Converting dataframe into list of dictionaries, 
+    # where each row is a dictionary with column names as the keys
     test_dict = (test_df.to_dict('records'))
+
+    # test_data is a list of tuples, 
+    # where each tuple contains data values corresponding to single row from csv
     test_data = []
     for dictionary in test_dict:
         test_data.append(tuple(dictionary.values()))
-
+    
+    # Inserting all the rows from csv into table
     mycursor.executemany(insert_test_query, test_data)
+
+    # Commiting inserted data to the database
     db.commit()
 
 #Drop a single tabel
@@ -140,9 +174,13 @@ def dropTable(table):
     mycursor.execute("DROP TABLE " + table)
 
 def drop_all_tables():
-    all_tables = get_tables()
-    for x in all_tables:
-        dropTable(x)
+    # all_tables = get_tables()
+    # for x in all_tables:
+    #     dropTable(x)
+    dropTable("test")
+    dropTable("class")
+    dropTable("student")
+    dropTable("school")
 
 #Returns a list of all tables in the database
 def get_tables():
@@ -153,7 +191,7 @@ def get_tables():
     
     return (tables)
 
-# closing database connection
+
 
 
 

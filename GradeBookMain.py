@@ -15,6 +15,14 @@ U /"___|uU |  _"\ u U  /"\  u |  _"\ \| ___"|/U | __")u    \/"_ \/    \/"_ \/  |
   _)(|_    //   \\_  \\    >>  |||_   <<   >>  _|| \\_       \\         \\   ,-,>> \\,-. 
  (__)__)  (__)  (__)(__)  (__)(__)_) (__) (__)(__) (__)     (__)       (__)   \.)   (_/ """)
 
+    # Drop all tables
+    qd.drop_all_tables()
+    # Create all tables
+    qd.create_school_table()
+    qd.create_class_table()
+    qd.create_student_table()
+    qd.create_test_table()
+
 
     #c1.createTable("NewClass")
     #c1.createTable("Classes")
@@ -28,17 +36,8 @@ U /"___|uU |  _"\ u U  /"\  u |  _"\ \| ___"|/U | __")u    \/"_ \/    \/"_ \/  |
     # #c1.insert_all_data(q,d)
     # print(c1.get_tables())
 
-#Function to clear all tables from the DB
-#Call to perform database testing and loading while developing DB Code
-
 
 
 if __name__ == "__main__":
-    # Drop all tables
-    qd.drop_all_tables()
-
-    # Create all tables
-    qd.create_school_table()
-    qd.create_class_table()
-    qd.create_student_table()
-    qd.create_test_table()
+    main()
+    
