@@ -15,3 +15,4 @@ Project is broken out to several sprint to add functionality while bringing the 
 3. Display Class
 4. Display Student Information
 5. Output to a CSV from the database
+6. ![Database Structure](https://github.com/Asaxena-2120/Gradebook/blob/main/UML_class.png)
