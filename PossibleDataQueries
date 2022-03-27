@@ -1,0 +1,46 @@
+--Student Views
+-Queries
+Their Information (Personal Information)
+Thier Information (Grades, Classes, Overall GPA)
+Current Semester Information (Schedule)
+Classes Taken (All Classes and Grades)
+Individual Class Statistics (Test Scores, Class Comparision (Overall, For Each Test)(High, Low, Standard Deviation))
+
+-Actions
+Login
+Update Personal Inforamtion
+Update Password
+Regrade Request
+?Register For Class?
+
+
+--Teacher Views
+-Queries
+Their Information (Personal Information)
+Current Semester Information (Schedule)
+Classes Taught (All Classes and Grades)
+Individual Class Statistics (Test Scores, Class Comparision (Overall, For Each Test)(High, Low, Standard Deviation))
+
+-Actions
+Login
+Update Grades
+Update Password
+Add Test\Scores
+Create Weighting Guidlines
+Change Test\Scores
+?Assign Grade Categories (Test\Homework\Projects\Quiz)?
+
+
+--Administator Views
+-Queries
+
+-Actions
+Login
+Add People
+Update Password
+Add Classes
+Assign Teachers to Classes
+Assign Students to Classes
+
+
+?Administator (Site vs. School)?
