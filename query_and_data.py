@@ -198,7 +198,11 @@ def get_data_from_table(table_name):
     # for row in mycursor.fetchall():
     #     print(type(row))
     #     print(row)
-    r = pd.read_sql_
+    SQL_Query = pd.read_sql_query(f"SELECT * FROM {table_name}", db)
+
+    df = pd.DataFrame(SQL_Query, columns=['studentID', 'student name', 'email'])
+    print(df)
+    print(type(df))
 
 # Get data from given table
 def table_to_csv(table_name):
