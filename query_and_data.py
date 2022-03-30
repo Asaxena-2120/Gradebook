@@ -191,9 +191,24 @@ def get_tables():
     
     return (tables)
 
+# Get data from given table
+def get_data_from_table(table_name):
+    select_query = f"SELECT * FROM {table_name}"
+    # mycursor.execute(select_query)
+    # for row in mycursor.fetchall():
+    #     print(type(row))
+    #     print(row)
+    r = pd.read_sql_
 
-
-
+# Get data from given table
+def table_to_csv(table_name):
+    select_query_csv = f"""SELECT * FROM {table_name}
+    INTO OUTFILE './Resources/{table_name}_from_table.csv'
+    FIELDS ENCLOSED BY '"' TERMINATED BY ';' ESCAPED BY '"'
+    LINES TERMINATED BY '\r\n';
+    """
+    mycursor.execute(select_query_csv)
+   
 
 
 
