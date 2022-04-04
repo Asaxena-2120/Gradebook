@@ -22,7 +22,9 @@ U /"___|uU |  _"\ u U  /"\  u |  _"\ \| ___"|/U | __")u    \/"_ \/    \/"_ \/  |
     qd.create_class_table()
     qd.create_student_table()
     qd.create_test_table()
+    qd.create_enrollment_table()
     qd.get_data_from_table('student')
+    qd.get_class('AI101')
    # qd.table_to_csv('student')
 
 

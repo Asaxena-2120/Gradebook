@@ -18,6 +18,7 @@ school_df = pd.read_csv('./Resources/School.csv')
 test_df = pd.read_csv("./Resources/Test.csv")
 student_df = pd.read_csv("./Resources/Student.csv")
 class_df = pd.read_csv("./Resources/Class.csv")
+enrollment_df = pd.read_csv("./Resources/Enrollment.csv")
 
 # Create Schema queries for each table and insert data in each table
 
@@ -169,6 +170,42 @@ def create_test_table():
     # Commiting inserted data to the database
     db.commit()
 
+# TEST
+def create_enrollment_table():
+    create_enrollment_table_query = """
+    CREATE TABLE enrollment (
+        enrollmentId INT PRIMARY KEY AUTO_INCREMENT,
+        studentId INT,
+        classId VARCHAR(100),
+        FOREIGN KEY(studentId) REFERENCES student(studentId),
+        FOREIGN KEY(classId) REFERENCES class(classId)
+        )
+    """
+
+    mycursor.execute(create_enrollment_table_query)
+
+    insert_enrollment_query = """
+    INSERT INTO enrollment
+    (studentId, classId)
+    VALUES (%s, %s)
+    """
+    
+    # Converting dataframe into list of dictionaries, 
+    # where each row is a dictionary with column names as the keys
+    enrollment_dict = (enrollment_df.to_dict('records'))
+
+    # test_data is a list of tuples, 
+    # where each tuple contains data values corresponding to single row from csv
+    enrollment_data = []
+    for dictionary in enrollment_dict:
+        enrollment_data.append(tuple(dictionary.values()))
+    
+    # Inserting all the rows from csv into table
+    mycursor.executemany(insert_enrollment_query, enrollment_data)
+
+    # Commiting inserted data to the database
+    db.commit()
+
 #Drop a single tabel
 def dropTable(table):
     mycursor.execute("DROP TABLE " + table)
@@ -177,6 +214,7 @@ def drop_all_tables():
     # all_tables = get_tables()
     # for x in all_tables:
     #     dropTable(x)
+    dropTable("enrollment")
     dropTable("test")
     dropTable("class")
     dropTable("student")
@@ -215,15 +253,11 @@ def table_to_csv(table_name):
     LINES TERMINATED BY '\r\n';
     """
     mycursor.execute(select_query_csv)
-   
 
+def get_class(class_name):
+    select_query = f"SELECT class.className, student.studentId, student.studentName FROM enrollment LEFT JOIN student ON enrollment.studentId = student.studentId LEFT JOIN class ON class.classID = enrollment.classID WHERE enrollment.classID = '{class_name}'"
+    #select_query = f"SELECT enrollment.classID, student.studentId, student.studentName FROM enrollment LEFT JOIN student ON enrollment.studentId = student.studentId WHERE enrollment.classID = '{class_name}'"
 
-
-    
-
-
-
-
-
-
-
+    result = pd.read_sql(select_query, db)
+    print(type(result))
+    print(result)
